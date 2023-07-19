@@ -1,17 +1,20 @@
+import { GetAnswerByExerciseIdUseCase } from "../../answers/application/GetAnswerByExerciseIdUseCase";
+import { PostgresAnswerRepository } from "../../answers/infrastructure/PostgresAnswerRepository";
 import { CreateExerciseUseCase } from "../application/CreateExerciseUseCase";
 import { GetAllExercisesUseCase } from "../application/GetAllExercisesUseCase";
 import { GetExerciseByIdUseCase } from "../application/GetExerciseByIdUseCase";
 import { GetExercisesByLessonIdUseCase } from "../application/GetExercisesByLessonIdUseCase";
-import { GradeAnswerUseCase } from "../application/GradeAnswerUseCase";
+// import { GradeAnswerUseCase } from "../application/GradeAnswerUseCase";
 import { CreateExerciseController } from "./controllers/CreateExerciseController";
 import { GetAllExercisesController } from "./controllers/GetAllExercisesController";
 import { GetExerciseByIdController } from "./controllers/GetExerciseByIdController";
 import { GetExercisesByLessonIdController } from "./controllers/GetExerciseByLessonIdController";
-import { GradeAnswerController } from "./controllers/GradeAnswerController";
+// import { GradeAnswerController } from "./controllers/GradeAnswerController";
 import { PostgresExerciseRepository } from "./PostgresExerciseRepository";
 
 //Exportar el repositorio
 export const postgresExerciseRepository = new PostgresExerciseRepository();
+export const postgresAnswerRepository = new PostgresAnswerRepository();
 
 //Create exercise
 export const createExerciseUseCase = new CreateExerciseUseCase(
@@ -30,11 +33,18 @@ export const getAllExercisesController = new GetAllExercisesController(
 );
 
 //Get Exercises by lessonId
+
+export const getAnswerByExerciseIdUseCase = new GetAnswerByExerciseIdUseCase(
+  postgresAnswerRepository
+);
 export const getExercisesByLessonIdUseCase = new GetExercisesByLessonIdUseCase(
   postgresExerciseRepository
 );
 export const getExercisesByLessonIdController =
-  new GetExercisesByLessonIdController(getExercisesByLessonIdUseCase);
+  new GetExercisesByLessonIdController(
+    getExercisesByLessonIdUseCase,
+    getAnswerByExerciseIdUseCase
+  );
 
 //Get exercise by id
 export const getExerciseByIdUseCase = new GetExerciseByIdUseCase(
@@ -45,9 +55,9 @@ export const getExerciseByIdController = new GetExerciseByIdController(
 );
 
 //Grade Answers
-export const gradeAnswerUseCase = new GradeAnswerUseCase(
-  postgresExerciseRepository
-);
-export const gradeAnswerController = new GradeAnswerController(
-  getExerciseByIdUseCase
-);
+// export const gradeAnswerUseCase = new GradeAnswerUseCase(
+//   postgresExerciseRepository
+// );
+// export const gradeAnswerController = new GradeAnswerController(
+//   getExerciseByIdUseCase
+// );

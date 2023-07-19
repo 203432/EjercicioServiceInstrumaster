@@ -6,7 +6,7 @@ import {
   getAllExercisesController,
   getExerciseByIdController,
   getExercisesByLessonIdController,
-  gradeAnswerController,
+  // gradeAnswerController,
 } from "./dependencies";
 
 export const exerciseRouter = express.Router();
@@ -36,7 +36,7 @@ exerciseRouter.get(
   getExerciseByIdController.run.bind(getExerciseByIdController)
 );
 
-exerciseRouter.post(
-  "/answer/:id",
-  gradeAnswerController.run.bind(gradeAnswerController)
-);
+// exerciseRouter.post(
+//   "/answer/:id",
+//   gradeAnswerController.run.bind(gradeAnswerController)
+// );

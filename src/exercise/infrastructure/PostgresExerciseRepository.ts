@@ -5,12 +5,11 @@ import { pool } from "./postgres/database";
 export class PostgresExerciseRepository implements ExerciseRepository {
   async createExercise(exercise: Exercise): Promise<Exercise | null> {
     await pool.query(
-      'INSERT INTO public."Exercise" (id_lesson, multimedia, question, answer, stars, exercise_order) VALUES ($1, $2, $3, $4, $5, $6)',
+      'INSERT INTO public."Exercise" (id_lesson, multimedia, question, stars, exercise_order) VALUES ($1, $2, $3, $4, $5)',
       [
         exercise.id_lesson,
         exercise.multimedia,
         exercise.question,
-        exercise.answer,
         exercise.stars,
         exercise.exercise_order,
       ]
@@ -27,7 +26,6 @@ export class PostgresExerciseRepository implements ExerciseRepository {
           row.id_lesson,
           row.multimedia,
           row.question,
-          row.answer,
           row.stars,
           row.exercise_order
         );

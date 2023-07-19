@@ -2,6 +2,7 @@ import bodyParser from "body-parser";
 import { config } from "dotenv";
 import express from "express";
 
+import { answerRouter } from "./answers/infrastructure/AnswerRouter";
 // import { courseRouter } from "./course/infrastructure/CourseRoutes";
 import { exerciseRouter } from "./exercise/infrastructure/ExerciseRoute";
 
@@ -13,6 +14,7 @@ const PORT = process.env.PORTPROJECT;
 app.use(bodyParser.json());
 
 app.use("/exercise", exerciseRouter);
+app.use("/answer", answerRouter);
 
 app.use("/public", express.static("imgs"));
 app.get("/", function (req, res) {

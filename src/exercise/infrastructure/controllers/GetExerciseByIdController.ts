@@ -19,11 +19,15 @@ export class GetExerciseByIdController {
         message: "No existe este ejercicio",
       });
     }
+    const enviroment = process.env.ENVIROMENT;
+    let baseUrl = `http://${process.env.IPPROJECT}/public/`;
+    if (enviroment == "local") {
+      baseUrl = `http://${process.env.IPPROJECT}:${process.env.PORTPROJECT}/public/`;
+    }
     console.log(exercise?.id);
     const imageFromDB = exercise.multimedia;
     console.log(imageFromDB);
-    const imageName = imageFromDB.split("\\").pop();
-    const baseUrl = `http://${process.env.IPPROJECT}:${process.env.PORTPROJECT}/public/`;
+    const imageName = imageFromDB.split(/[\\\/]/).pop();
     const imageUrl = baseUrl + imageName;
     console.log(imageUrl);
     const encodedUrl = encodeURI(imageUrl);
@@ -33,7 +37,6 @@ export class GetExerciseByIdController {
         id: exercise.id,
         id_lesson: exercise.id_lesson,
         question: exercise.question,
-        answer: exercise.answer,
         exercise_order: exercise.exercise_order,
         stars: exercise.stars,
         multimedia: encodedUrl,

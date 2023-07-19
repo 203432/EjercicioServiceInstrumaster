@@ -16,7 +16,6 @@ export class CreateExerciseController {
         exercise.id_lesson,
         image,
         exercise.question,
-        exercise.answer,
         exercise.stars,
         exercise.exercise_order
       )
@@ -26,7 +25,6 @@ export class CreateExerciseController {
       message: "Nueva ejercicio añadida",
       data: {
         exercise_question: exercise.question,
-        exercise_options: exercise.answer,
       },
     });
   }

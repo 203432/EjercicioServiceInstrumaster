@@ -1,9 +1,12 @@
+import { config } from "dotenv";
 import { Pool } from "pg";
+config();
 
+const port = parseInt(process.env.DBPORT || "5432", 10);
 export const pool = new Pool({
-  user: "postgres",
-  host: "localhost",
-  password: "Nintendo64",
-  database: "Instrumaster_Exercises",
-  port: 5432,
+  user: process.env.DBUSER,
+  host: process.env.DBHOST,
+  password: process.env.DBPASSWORD,
+  database: process.env.DBDATABASE,
+  port: port,
 });
